@@ -1,6 +1,7 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import Alert from './alert-login.vue';
 
 export default defineComponent({
@@ -9,6 +10,7 @@ export default defineComponent({
     Alert,
   },
   setup() {
+    const store = useStore();
     const username = ref('');
     const password = ref('');
     const router = useRouter();
@@ -33,9 +35,8 @@ export default defineComponent({
       }
 
       if (username.value === 'anagdinizg' && password.value === '12345') {
-        alertType.value = 'success';
-        alertMessage.value = 'Login bem-sucedido!';
         isVisible.value = true;
+        store.dispatch('updateUsername', username.value);
         router.push({ name: 'home' });
       } else {
         alertType.value = 'error';

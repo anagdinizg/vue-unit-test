@@ -1,6 +1,16 @@
+<script setup>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+
+const store = useStore();
+const username = computed(() => store.getters.getUsername);
+
+</script>
+
 <template>
   <div class="about">
-    <h1>Bem vindo!</h1>
+    <h1 v-if="username">Bem vindo(a), {{ username }}!</h1>
+    <h1 v-else>Bem vindo(a)!</h1>
   </div>
 </template>
 
